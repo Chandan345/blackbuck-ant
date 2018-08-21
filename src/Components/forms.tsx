@@ -7,34 +7,77 @@ const { Header, Content, Sider } = Layout;
 
 const columns = [{
     dataIndex: 'id',
+    render: (text: any) => <a href="javascript:;">{text}</a>,
+    sorter: (a: any, b: any) => a.id.length - b.id.length,
     title: 'Name',
 
 }, {
     dataIndex: 'idate',
+    sorter: (a: any, b: any) => a.idate.length - b.idate.length,
     title: 'Indent Date',
 
 }, {
     dataIndex: 'edate',
+    sorter: (a: any, b: any) => a.edate.length - b.edate.length,
     title: 'Expiry date',
 
 }, {
     dataIndex: 'from',
+    filters: [{
+        text: 'Bangalore',
+        value: 'Bangalore',
+    }, {
+        text: 'Delhi',
+        value: 'Delhi',
+    },],
+    onFilter: (value: any, record: any) => record.from.indexOf(value) === 0,
+    // sorter: (a: any, b: any) => a.from.length - b.from.length,
     title: 'From',
 
-}, {
+
+},
+{
     dataIndex: 'to',
+    filters: [{
+        text: 'Bangalore',
+        value: 'Bangalore',
+    }, {
+        text: 'Delhi',
+        value: 'Delhi',
+    },],
+    onFilter: (value: any, record: any) => record.to.indexOf(value) === 0,
+    // sorter: (a: any, b: any) => a.to.length - b.to.length,
     title: 'To',
 
 }, {
     dataIndex: 'truck',
+    filters: [{
+        text: '16',
+        value: '16',
+    }, {
+        text: '17',
+        value: '17',
+    },],
+    onFilter: (value: any, record: any) => record.truck.indexOf(value) === 0,
+    // sorter: (a: any, b: any) => a.truck.length - b.truck.length,
     title: 'Truck Type',
 
 }, {
     dataIndex: 'transporter',
+    filters: [{
+        text: 'Zinka',
+        value: 'Zinka',
+    }, {
+        text: 'BlackBuck',
+        value: 'BlackBuck',
+    },],
+    onFilter: (value: any, record: any) => record.transporter.indexOf(value) === 0,
+    // sorter: (a: any, b: any) => a.transporter.length - b.transporter.length,
     title: 'Transporter',
 
 }, {
     dataIndex: 'status',
+    render: (text: any) => <p style={{ color: 'green' }}>{text}</p>,
     title: 'Status',
 
 }];
@@ -149,7 +192,7 @@ class Forms extends React.Component {
                     <div style={{ marginTop: 20, marginRight: 20 }}>
                         <Button type="default" icon="file" style={{ float: 'right', marginRight: 5 }}><Icon type="down" /></Button>
                         <Button type="default" icon="file-add" style={{ float: 'right', marginRight: 5 }} />
-                        <Button type="primary" icon="download" style={{ float: 'right', marginRight: 5 }}>Create Indents</Button>
+                        <Button type="primary" icon="plus" style={{ float: 'right', marginRight: 5 }}>Create Indents</Button>
                     </div>
                     <div style={{ padding: '15px 0px 15px 15px' }}>
                         <Row gutter={16}>
@@ -191,7 +234,7 @@ class Forms extends React.Component {
                                 <Card>
                                     <List.Item>
                                         <List.Item.Meta
-                                            avatar={<Avatar icon="file" style={{ color: 'blue', marginTop: 7 }} />}
+                                            avatar={<Avatar icon="profile" style={{ color: 'blue', marginTop: 7 }} />}
                                             title="160"
                                             description="Reported"
                                         />
@@ -217,7 +260,7 @@ class Forms extends React.Component {
                         <span style={{ marginLeft: 8 }}>
                             {hasSelected ? `Selected ${selectedRowKeys.length} items` : ''}
                         </span>
-                        <Table rowSelection={rowSelection} columns={columns} dataSource={data} style={{background: "#fff"}}/>
+                        <Table rowSelection={rowSelection} columns={columns} dataSource={data} style={{ background: "#fff" }} />
                     </Content>
                 </Layout>
             </Layout>
